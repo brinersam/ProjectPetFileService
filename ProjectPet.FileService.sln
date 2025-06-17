@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectPet.FileService.Comm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectPet.FileService.Contracts", "ProjectPet.FileService.Contracts\ProjectPet.FileService.Contracts.csproj", "{2DAC1B84-B97F-4A62-AE14-24E5931B53D0}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{13703A53-A9F3-4B8C-BAB1-1A223B47D387}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{2DAC1B84-B97F-4A62-AE14-24E5931B53D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DAC1B84-B97F-4A62-AE14-24E5931B53D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DAC1B84-B97F-4A62-AE14-24E5931B53D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13703A53-A9F3-4B8C-BAB1-1A223B47D387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13703A53-A9F3-4B8C-BAB1-1A223B47D387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13703A53-A9F3-4B8C-BAB1-1A223B47D387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13703A53-A9F3-4B8C-BAB1-1A223B47D387}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
