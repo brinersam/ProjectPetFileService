@@ -278,6 +278,8 @@ dotnet_diagnostic.SA1201.severity = none
 dotnet_diagnostic.SA1623.severity = none
 dotnet_diagnostic.SA1118.severity = none
 dotnet_diagnostic.SA1121.severity = none
+dotnet_diagnostic.CS0219.severity = warning
+
 
 
 # Проброс cancellation tokens
