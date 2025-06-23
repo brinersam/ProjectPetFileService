@@ -1,3 +1,3 @@
 ﻿namespace ProjectPet.FileService.Domain.FileManagment;
 
-public record PartETag(int PartNumber, string ETag);
+public record PartETagDto(int PartNumber, string ETag);

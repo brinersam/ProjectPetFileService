@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using ProjectPet.FileService.Domain.FileManagment;
+using ProjectPet.FileService.Contracts.Features.MultipartPutChunkUrlUpload;
 using ProjectPet.FileService.Endpoints;
 using ProjectPet.FileService.Infrastructure.Providers;
 using IResult = Microsoft.AspNetCore.Http.IResult;
@@ -8,10 +8,6 @@ namespace ProjectPet.FileService.Features;
 
 public static class MultipartPutChunkUrlUpload
 {
-    private record MultipartPutChunkUrlRequest(FileLocation FileLocation, string UploadId, int PartNumber);
-
-    private record MultipartPutChunkUrlDto(string Url, int PartNumber);
-
     private class MultipartPutChunkUrlRequestValidator : AbstractValidator<MultipartPutChunkUrlRequest>
     {
         public MultipartPutChunkUrlRequestValidator()
@@ -44,7 +40,7 @@ public static class MultipartPutChunkUrlUpload
         if (s3Result.IsFailure)
             return Results.BadRequest(s3Result.Error);
 
-        var response = new MultipartPutChunkUrlDto(s3Result.Value, request.PartNumber);
+        var response = new MultipartPutChunkUrlResponse(s3Result.Value, request.PartNumber);
 
         return Results.Ok(response);
     }
