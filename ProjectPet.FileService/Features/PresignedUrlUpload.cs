@@ -24,8 +24,7 @@ public static class PresignedUrlUpload
     {
         var s3Result = await amazonS3.CreatePresignedUploadUrlAsync(
                 request.FileName,
-                request.FileLocation,
-                ct);
+                request.FileLocation);
 
         if (s3Result.IsFailure)
             return Results.BadRequest(s3Result.Error);

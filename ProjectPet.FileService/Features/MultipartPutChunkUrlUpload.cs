@@ -36,7 +36,7 @@ public static class MultipartPutChunkUrlUpload
         if (validatorResult.IsValid == false)
             return Results.BadRequest(validatorResult.Errors);
 
-        var s3Result = await amazonS3.MultipartCreatePresignedUploadUrlChunkAsync(
+        var s3Result = await amazonS3.CreatePresignedUploadUrlAsync(
                 request.FileLocation,
                 request.UploadId,
                 request.PartNumber);
