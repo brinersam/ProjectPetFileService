@@ -24,7 +24,7 @@ public class S3Provider : IS3Provider
         _logger = logger;
     }
 
-    public async Task<Result<string, Error>> MultipartCreatePresignedUploadUrlChunkAsync(
+    public async Task<Result<string, Error>> CreatePresignedUploadUrlAsync(
         FileLocation location,
         string uploadId,
         int partNumber)
@@ -275,8 +275,7 @@ public class S3Provider : IS3Provider
 
     public async Task<Result<string, Error>> CreatePresignedUploadUrlAsync(
         string fileName,
-        FileLocation location,
-        CancellationToken ct)
+        FileLocation location)
     {
         try
         {
@@ -317,25 +316,4 @@ public class S3Provider : IS3Provider
         _logger.LogError(exception, "Bucket[{O0}]: S3Provider error!", bucket);
         return Error.Failure(code, exception.Message);
     }
-}
-
-public interface IS3Provider
-{
-    Task<Result<FileUrl, Error>> CreatePresignedDownloadUrlAsync(FileLocation location, int expirationHours);
-
-    Task<Result<string, Error>> CreatePresignedUploadUrlAsync(string fileName, FileLocation location, CancellationToken ct);
-
-    Task<Result<List<string>, Error>> ListBucketsAsync(CancellationToken ct);
-
-    Task<UnitResult<Error>> UploadFileAsync(FileLocation location, string? contentType, Stream file, CancellationToken ct);
-
-    Task<Result<string, Error>> DeleteFileAsync(FileLocation location, CancellationToken ct);
-
-    Task<Result<string, Error>> MultipartCreatePresignedUploadUrlChunkAsync(FileLocation location, string uploadId, int partNumber);
-
-    Task<Result<string, Error>> MultipartUploadStartAsync(string fileName, string contentType, FileLocation location, CancellationToken ct);
-
-    Task<UnitResult<Error>> MultipartUploadAbortAsync(FileLocation location, string uploadId, CancellationToken ct);
-
-    Task<Result<string, Error>> MultipartUploadCompleteAsync(FileLocation location, string uploadId, IEnumerable<Domain.FileManagment.PartETag> partETags, CancellationToken ct);
 }
