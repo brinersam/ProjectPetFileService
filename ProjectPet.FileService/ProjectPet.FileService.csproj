@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="AWSSDK.S3" Version="4.0.1.7" />
     <PackageReference Include="Brinersam.ProjectPet.SharedKernel" Version="1.0.0" />
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.6" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
@@ -15,9 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\" />
     <Folder Include="Infrastructure\Repositories\" />
-    <Folder Include="Endpoints\" />
   </ItemGroup>
 
 </Project>

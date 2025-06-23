@@ -14,4 +14,6 @@ public class S3Options
 
     public double UrlExpirationDays { get; }
 
+    public int ChunkSizeMb { get; }
+
 }

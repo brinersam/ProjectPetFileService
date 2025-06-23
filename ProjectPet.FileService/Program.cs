@@ -16,6 +16,8 @@ public class Program
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
 
+        builder.Services.AddEndpoints();
+
         // Amazon s3
         builder.AddS3();
 
@@ -29,9 +31,9 @@ public class Program
             app.MapScalarApiReference();
         }
 
-        app.UseHttpsRedirection();
-
         app.UseAuthorization();
+
+        app.MapEndpoints();
 
         app.Run();
     }
