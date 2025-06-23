@@ -4,6 +4,12 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>Brinersam.ProjectPet.FileService.Contracts</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>ProjectPet</Authors>
+    <Company>ProjectPet</Company>
+    <PackageDescription>Contracts project of a FileService</PackageDescription>
+    <RepositoryUrl>https://github.com/brinersam/ProjectPetFileService</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
