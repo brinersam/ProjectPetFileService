@@ -10,7 +10,7 @@ public static class DeleteFile
     public class Endpoint : IEndpoint
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
-            => app.MapDelete("/api/files/{id:guid}/delete", Handler);
+            => app.MapPost("/api/files/{id:guid}/delete", Handler);
     }
 
     private static async Task<IResult> Handler(
