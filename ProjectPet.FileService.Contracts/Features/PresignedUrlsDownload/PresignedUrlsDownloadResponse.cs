@@ -1,4 +1,4 @@
-﻿using ProjectPet.FileService.Domain.FileManagment;
+﻿using ProjectPet.FileService.Contracts.Dtos;
 
 namespace ProjectPet.FileService.Contracts.Features.PresignedUrlsDownload;
 

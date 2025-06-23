@@ -3,7 +3,6 @@ using Amazon.S3.Model;
 using CSharpFunctionalExtensions;
 using Microsoft.Extensions.Options;
 using ProjectPet.FileService.Contracts.Dtos;
-using ProjectPet.FileService.Domain.FileManagment;
 using ProjectPet.FileService.Options;
 using ProjectPet.SharedKernel.ErrorClasses;
 
@@ -144,7 +143,7 @@ public class S3Provider : IS3Provider
     public async Task<Result<string, Error>> MultipartUploadCompleteAsync(
         FileLocationDto location,
         string uploadId,
-        IEnumerable<Domain.FileManagment.PartETagDto> partETags,
+        IEnumerable<PartETagDto> partETags,
         CancellationToken ct)
     {
         try

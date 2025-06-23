@@ -1,6 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
 using ProjectPet.FileService.Contracts.Dtos;
-using ProjectPet.FileService.Domain.FileManagment;
 using ProjectPet.SharedKernel.ErrorClasses;
 
 namespace ProjectPet.FileService.Infrastructure.Providers;

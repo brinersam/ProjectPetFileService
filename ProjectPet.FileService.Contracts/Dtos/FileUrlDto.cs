@@ -1,3 +1,3 @@
-﻿namespace ProjectPet.FileService.Domain.FileManagment;
+﻿namespace ProjectPet.FileService.Contracts.Dtos;
 
 public record FileUrlDto(string FileId, string Url);
