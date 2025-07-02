@@ -17,11 +17,15 @@ public static class WebApplicationBuilderExtensions
         {
             var options = services.GetService<IOptions<S3Options>>()!.Value;
 
+            var scheme = options.WithSsl ? "https" : "http";
+            var endpoint = $"{scheme}://{options.Endpoint}";
+
             var creds = new BasicAWSCredentials(options.AccessKey, options.SecretKey);
 
             var config = new AmazonS3Config
             {
-                ServiceURL = options.Endpoint,
+                ForcePathStyle = true,
+                ServiceURL = endpoint,
                 UseHttp = !options.WithSsl,
             };
 

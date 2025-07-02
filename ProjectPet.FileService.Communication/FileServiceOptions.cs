@@ -3,5 +3,5 @@ public class FileServiceOptions
 {
     public const string REGION = "Service.FileService";
 
-    public string Endpoint { get; } = "http://UNCONFIGURED_FILESERVICE_ENDPOINT";
+    public string Endpoint { get; init; } = "http://UNCONFIGURED_FILESERVICE_ENDPOINT";
 }
