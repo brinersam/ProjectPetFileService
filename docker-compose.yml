@@ -1,4 +1,8 @@
-﻿services:
+﻿networks:
+  ProjectPetNetwork:
+    external: true
+
+services:
   projectpet.fileservice:
     container_name: ProjectPet.fileservice
     build:
@@ -19,6 +23,9 @@
         - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
     depends_on:
         - "projectpet.minio"
+    networks:
+      - ProjectPetNetwork
+      - default
 
   projectpet.minio:
     image: minio/minio
