@@ -1,10 +1,7 @@
-﻿using System.Collections.Specialized;
-using System.Net;
-using System.Net.Http.Json;
-using System.Web;
-using CSharpFunctionalExtensions;
+﻿using CSharpFunctionalExtensions;
 using Microsoft.Extensions.Options;
 using ProjectPet.FileService.Contracts;
+using ProjectPet.FileService.Contracts.Dtos;
 using ProjectPet.FileService.Contracts.Features.DeleteFile;
 using ProjectPet.FileService.Contracts.Features.MultipartCancelUpload;
 using ProjectPet.FileService.Contracts.Features.MultipartFinishUpload;
@@ -13,6 +10,10 @@ using ProjectPet.FileService.Contracts.Features.MultipartStartUpload;
 using ProjectPet.FileService.Contracts.Features.PresignedUrlsDownload;
 using ProjectPet.FileService.Contracts.Features.PresignedUrlUpload;
 using ProjectPet.SharedKernel.ErrorClasses;
+using System.Collections.Specialized;
+using System.Net;
+using System.Net.Http.Json;
+using System.Web;
 
 namespace ProjectPet.FileService.Communication;
 public class FileServiceClient : IFileService
@@ -31,8 +32,18 @@ public class FileServiceClient : IFileService
     public async Task<Result<DeleteFileResponse, Error>> DeleteFileAsync(FileLocationDto location, CancellationToken ct = default)
     {
         var uri = BuildUri(
-            $"api/files/{id}/delete",
-            x => x["bucket"] = bucket);
+            $"api/files/{location.FileId}/delete",
+            x => x["bucket"] = location.BucketName);
+
+        var response = await _httpClient.DeleteAsync(uri, ct);
+
+        if (response.StatusCode != HttpStatusCode.OK)
+        {
+            var error = await response.Content.ReadAsStringAsync(ct);
+            if (String.IsNullOrWhiteSpace(error))
+                error = response.StatusCode.ToString();
+            return Error.Failure("fileservice.error", error);
+        }
 
         var fileResponse = await response.Content.ReadFromJsonAsync<DeleteFileResponse>(ct);
         return fileResponse!;
@@ -87,6 +98,8 @@ public class FileServiceClient : IFileService
         if (response.StatusCode != HttpStatusCode.OK)
         {
             var error = await response.Content.ReadAsStringAsync(ct);
+            if (String.IsNullOrWhiteSpace(error))
+                error = response.StatusCode.ToString();
             return Error.Failure("fileservice.error", error);
         }
 
@@ -101,6 +114,8 @@ public class FileServiceClient : IFileService
         if (response.StatusCode != HttpStatusCode.OK)
         {
             var error = await response.Content.ReadAsStringAsync(ct);
+            if (String.IsNullOrWhiteSpace(error))
+                error = response.StatusCode.ToString();
             return Error.Failure("fileservice.error", error);
         }
 
@@ -113,7 +128,7 @@ public class FileServiceClient : IFileService
         var specificUri = endPoint.TrimStart('/');
 
         var builder = new UriBuilder(string.Format("{0}/{1}", baseUri, specificUri));
-        builder.Port = -1;
+        builder.Port = 6060;
 
         if (queryOpts is not null)
         {
