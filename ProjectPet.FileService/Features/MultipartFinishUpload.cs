@@ -33,7 +33,7 @@ public static class MultipartFinishUpload
             return Results.BadRequest(validatorResult.Errors);
 
         var s3Result = await amazonS3.MultipartUploadCompleteAsync(
-                request.FileLocation,
+                request.Location,
                 request.UploadId,
                 request.PartEtags,
                 ct);

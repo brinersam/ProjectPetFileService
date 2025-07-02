@@ -28,13 +28,14 @@ public class FileServiceClient : IFileService
         _baseUrl = options.Endpoint;
     }
 
-    public async Task<Result<DeleteFileResponse, Error>> DeleteFileAsync(Guid id, string bucket, DeleteFileRequest request, CancellationToken ct = default)
+    public async Task<Result<DeleteFileResponse, Error>> DeleteFileAsync(FileLocationDto location, CancellationToken ct = default)
     {
         var uri = BuildUri(
             $"api/files/{id}/delete",
             x => x["bucket"] = bucket);
 
-        return await CallHttpClientAsync<DeleteFileRequest, DeleteFileResponse>(uri, request, ct);
+        var fileResponse = await response.Content.ReadFromJsonAsync<DeleteFileResponse>(ct);
+        return fileResponse!;
     }
 
     public async Task<UnitResult<Error>> MultipartCancelUploadAsync(MultipartCancelUploadRequest request, CancellationToken ct = default)

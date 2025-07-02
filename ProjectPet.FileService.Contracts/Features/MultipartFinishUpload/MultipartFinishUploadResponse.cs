@@ -1,3 +1,5 @@
-﻿namespace ProjectPet.FileService.Contracts.Features.MultipartFinishUpload;
+﻿using ProjectPet.FileService.Contracts.Dtos;
 
-public record MultipartFinishUploadResponse(string Key);
+namespace ProjectPet.FileService.Contracts.Features.MultipartFinishUpload;
+
+public record MultipartFinishUploadResponse(FileLocationDto location);

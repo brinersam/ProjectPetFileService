@@ -1,4 +1,4 @@
 ﻿using ProjectPet.FileService.Contracts.Dtos;
 
 namespace ProjectPet.FileService.Contracts.Features.DeleteFile;
-public record DeleteFileRequest(FileLocationDto FileLocation, string UploadId);
+public record DeleteFileRequest(FileLocationDto FileLocation);

@@ -1,3 +1,5 @@
-﻿namespace ProjectPet.FileService.Contracts.Features.MultipartStartUpload;
+﻿using ProjectPet.FileService.Contracts.Dtos;
 
-public record MultipartStartUploadResponse(string FileId, string UploadId, string BucketName, long ChunkSize, int TotalChunks);
+namespace ProjectPet.FileService.Contracts.Features.MultipartStartUpload;
+
+public record MultipartStartUploadResponse(FileLocationDto location, string UploadId, long ChunkSize, int TotalChunks);
