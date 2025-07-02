@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>Brinersam.ProjectPet.FileService.Communication</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.2</Version>
     <Authors>ProjectPet</Authors>
     <Company>ProjectPet</Company>
     <PackageDescription>Communication project of a FileService</PackageDescription>

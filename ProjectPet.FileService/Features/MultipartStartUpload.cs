@@ -26,7 +26,9 @@ public static class MultipartStartUpload
 
         string fileId = Guid.NewGuid().ToString();
 
-        int totalChunks = (int)Math.Ceiling((double)request.FileSize / (double)chunkSizeMb);
+        int totalChunks = (int)Math.Ceiling(((double)request.FileSizeBytes / 1024 / 1024) / (double)chunkSizeMb);
+        if (totalChunks > 9)
+            return Results.BadRequest(Error.Failure("too.many.chunks", $"Size of the file is too big! Almost created {totalChunks} chunks"));
 
         FileLocationDto location = new(fileId, request.BucketName);
 
@@ -42,7 +44,6 @@ public static class MultipartStartUpload
         var response = new MultipartStartUploadResponse(
                 new FileLocationDto(fileId, request.BucketName),
                 s3Result.Value,
-                request.BucketName,
                 chunkSizeMb,
                 totalChunks);
 

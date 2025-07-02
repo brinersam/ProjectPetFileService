@@ -85,7 +85,7 @@ public class S3Provider : IS3Provider
             var response = await _s3Client.InitiateMultipartUploadAsync(request, ct);
 
             _logger.LogTrace(
-                "Bucket[{O0}]: Multipart upload started for file (id {O1}, name{O2}, contentType of {O3})",
+                "Bucket[{p0BucketName}]: Multipart upload started for file (id {p1FileId}, name{p2fileName}, contentType of {p3contentType})",
                 location.BucketName,
                 location.FileId,
                 fileName,
