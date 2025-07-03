@@ -2,7 +2,7 @@
 using ProjectPet.FileService.Contracts.Dtos;
 using ProjectPet.SharedKernel.ErrorClasses;
 
-namespace ProjectPet.FileService.Infrastructure.Providers;
+namespace ProjectPet.FileService.Infrastructure.AmazonS3;
 public interface IS3Provider
 {
     Task<Result<FileUrlDto, Error>> CreatePresignedDownloadUrlAsync(FileLocationDto location, int expirationHours);

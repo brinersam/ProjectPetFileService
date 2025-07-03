@@ -2,7 +2,7 @@
 using ProjectPet.FileService.Contracts.Dtos;
 using ProjectPet.FileService.Contracts.Features.MultipartStartUpload;
 using ProjectPet.FileService.Endpoints;
-using ProjectPet.FileService.Infrastructure.Providers;
+using ProjectPet.FileService.Infrastructure.AmazonS3;
 using ProjectPet.FileService.Options;
 using ProjectPet.SharedKernel.ErrorClasses;
 

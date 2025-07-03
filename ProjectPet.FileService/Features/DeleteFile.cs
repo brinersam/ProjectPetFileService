@@ -2,7 +2,7 @@
 using ProjectPet.FileService.Contracts.Dtos;
 using ProjectPet.FileService.Contracts.Features.DeleteFile;
 using ProjectPet.FileService.Endpoints;
-using ProjectPet.FileService.Infrastructure.Providers;
+using ProjectPet.FileService.Infrastructure.AmazonS3;
 
 namespace ProjectPet.FileService.Features;
 

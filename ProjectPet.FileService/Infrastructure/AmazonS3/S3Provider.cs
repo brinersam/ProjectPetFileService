@@ -6,7 +6,7 @@ using ProjectPet.FileService.Contracts.Dtos;
 using ProjectPet.FileService.Options;
 using ProjectPet.SharedKernel.ErrorClasses;
 
-namespace ProjectPet.FileService.Infrastructure.Providers;
+namespace ProjectPet.FileService.Infrastructure.AmazonS3;
 
 public class S3Provider : IS3Provider
 {

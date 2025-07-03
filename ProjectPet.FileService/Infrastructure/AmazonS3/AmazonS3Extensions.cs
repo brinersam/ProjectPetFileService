@@ -1,7 +1,6 @@
 ﻿using Amazon.Runtime;
 using Amazon.S3;
 using Microsoft.Extensions.Options;
-using ProjectPet.FileService.Infrastructure.Providers;
 using ProjectPet.FileService.Options;
 
 namespace ProjectPet.FileService.Infrastructure.AmazonS3;

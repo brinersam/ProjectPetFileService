@@ -1,6 +1,6 @@
 ﻿using ProjectPet.FileService.Contracts.Features.PresignedUrlUpload;
 using ProjectPet.FileService.Endpoints;
-using ProjectPet.FileService.Infrastructure.Providers;
+using ProjectPet.FileService.Infrastructure.AmazonS3;
 using IResult = Microsoft.AspNetCore.Http.IResult;
 
 namespace ProjectPet.FileService.Features;
