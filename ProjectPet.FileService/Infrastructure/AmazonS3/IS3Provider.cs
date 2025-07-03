@@ -1,4 +1,5 @@
-﻿using CSharpFunctionalExtensions;
+﻿using Amazon.S3.Model;
+using CSharpFunctionalExtensions;
 using ProjectPet.FileService.Contracts.Dtos;
 using ProjectPet.SharedKernel.ErrorClasses;
 
@@ -15,6 +16,8 @@ public interface IS3Provider
 
     Task<Result<List<string>, Error>> ListBucketsAsync(CancellationToken ct);
 
+    Task<Result<List<MultipartUpload>, Error>> ListMultipartUploadsAsync(string bucketName, CancellationToken ct);
+
     Task<UnitResult<Error>> MultipartUploadAbortAsync(FileLocationDto location, string uploadId, CancellationToken ct);
 
     Task<Result<FileLocationDto, Error>> MultipartUploadCompleteAsync(FileLocationDto location, string uploadId, IEnumerable<PartETagDto> partETags, CancellationToken ct);
@@ -22,5 +25,4 @@ public interface IS3Provider
     Task<Result<string, Error>> MultipartUploadStartAsync(string fileName, string contentType, FileLocationDto location, CancellationToken ct);
 
     Task<UnitResult<Error>> UploadFileAsync(FileLocationDto location, string? contentType, Stream file, CancellationToken ct);
-
 }

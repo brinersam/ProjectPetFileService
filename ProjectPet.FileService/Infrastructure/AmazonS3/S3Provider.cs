@@ -122,15 +122,19 @@ public class S3Provider : IS3Provider
                 location.BucketName,
                 uploadId);
 
-            var partsUploading = await _s3Client.ListPartsAsync(location.BucketName, location.FileId, uploadId, ct);
-
-            if (partsUploading.ContentLength > 0)
+            try
             {
-                _logger.LogWarning(
-                    "Bucket[{O0}]: Loose parts still uploading (uploadId {O1})! Cleanup might be needed",
-                    location.BucketName,
-                    uploadId);
+                var partsUploading = await _s3Client.ListPartsAsync(location.BucketName, location.FileId, uploadId, ct);
+                if (partsUploading.Parts.Count > 0)
+                {
+                    _logger.LogWarning(
+                        "Bucket[{O0}]: Loose parts still uploading (uploadId {O1})! Cleanup might be needed",
+                        location.BucketName,
+                        uploadId);
+                }
             }
+            catch (AmazonS3Exception exception)
+            { } // suppress, if we got this it means that we deleted just fine
 
             return Result.Success<Error>();
         }
@@ -312,6 +316,21 @@ public class S3Provider : IS3Provider
         }
     }
 
+    public async Task<Result<List<MultipartUpload>, Error>> ListMultipartUploadsAsync(string bucketName, CancellationToken ct)
+    {
+        try
+        {
+            var result = await _s3Client.ListMultipartUploadsAsync(bucketName, ct);
+            if (result.MultipartUploads is null)
+                return new List<MultipartUpload>();
+
+            return result.MultipartUploads.ToList();
+        }
+        catch (AmazonS3Exception exception)
+        {
+            return ErrorResult(exception, bucketName);
+        }
+    }
     private Error ErrorResult(AmazonS3Exception exception, string bucket = "unknown", string code = "amazonS3.failure")
     {
         _logger.LogError(exception, "Bucket[{O0}]: S3Provider error!", bucket);
