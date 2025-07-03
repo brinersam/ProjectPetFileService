@@ -4,11 +4,11 @@ using Microsoft.Extensions.Options;
 using ProjectPet.FileService.Infrastructure.Providers;
 using ProjectPet.FileService.Options;
 
-namespace ProjectPet.FileService.Extensions;
+namespace ProjectPet.FileService.Infrastructure.AmazonS3;
 
-public static class WebApplicationBuilderExtensions
+public static class AmazonS3Extensions
 {
-    public static WebApplicationBuilder AddS3(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder AddAmazonS3(this WebApplicationBuilder builder)
     {
         builder.Services.Configure<S3Options>(
             builder.Configuration.GetRequiredSection(S3Options.SECTION));

@@ -23,6 +23,7 @@ services:
         - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
     depends_on:
         - "projectpet.minio"
+        - "projectpet.fileservice.mongodb"
     networks:
       - ProjectPetNetwork
       - default
@@ -39,3 +40,12 @@ services:
         - "5001:5001"
     volumes:
         - ./minio-data:/var/lib/minio/data
+
+  projectpet.fileservice.mongodb:
+    image: mongo:latest
+    container_name: ProjectPet.fileservice.mongodb
+    command: mongod -port 5050
+    ports:
+      - "5050:5050"
+    volumes:
+        - ./mongoDb-data:/data/db

@@ -1,4 +1,8 @@
-﻿using ProjectPet.FileService.Extensions;
+﻿using Hangfire;
+using ProjectPet.FileService.Extensions;
+using ProjectPet.FileService.Infrastructure.AmazonS3;
+using ProjectPet.FileService.Infrastructure.Hangfire;
+using ProjectPet.FileService.Infrastructure.MongoDb;
 using Scalar.AspNetCore;
 
 namespace ProjectPet.FileService;
@@ -18,8 +22,11 @@ public class Program
 
         builder.Services.AddEndpoints();
 
-        // Amazon s3
-        builder.AddS3();
+        builder.AddAmazonS3();
+
+        builder.AddMongoDb();
+
+        builder.AddHangfire();
 
         var app = builder.Build();
 
@@ -31,9 +38,14 @@ public class Program
             app.MapScalarApiReference();
         }
 
-        //app.UseAuthorization();
-
         app.MapEndpoints();
+        app.UseAuthlessHangfireDashboard("/jobs");
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var backgroundJobs = scope.ServiceProvider.GetRequiredService<IBackgroundJobClient>();
+            backgroundJobs.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
+        }
 
         app.Run();
     }
