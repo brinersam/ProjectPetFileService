@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectPet.FileService.Cont
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{13703A53-A9F3-4B8C-BAB1-1A223B47D387}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DEVShared", "..\..\ProjectPet\src\DEVShared\DEVShared.csproj", "{58ECEEF1-8E51-874C-8AC3-A5D5F1B3FCA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,8 +41,15 @@ Global
 		{13703A53-A9F3-4B8C-BAB1-1A223B47D387}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13703A53-A9F3-4B8C-BAB1-1A223B47D387}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13703A53-A9F3-4B8C-BAB1-1A223B47D387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58ECEEF1-8E51-874C-8AC3-A5D5F1B3FCA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58ECEEF1-8E51-874C-8AC3-A5D5F1B3FCA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58ECEEF1-8E51-874C-8AC3-A5D5F1B3FCA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58ECEEF1-8E51-874C-8AC3-A5D5F1B3FCA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {28435E06-82DE-4099-9A77-2AC4CED073E6}
 	EndGlobalSection
 EndGlobal

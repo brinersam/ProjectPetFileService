@@ -12,6 +12,7 @@
     <PackageReference Include="Hangfire" Version="1.8.20" />
     <PackageReference Include="Hangfire.AspNetCore" Version="1.8.20" />
     <PackageReference Include="Hangfire.Mongo" Version="1.11.6" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.5.2" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.6" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
@@ -25,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\ProjectPet\src\DEVShared\DEVShared.csproj" />
     <ProjectReference Include="..\ProjectPet.FileService.Contracts\ProjectPet.FileService.Contracts.csproj" />
   </ItemGroup>
 
