@@ -1,6 +1,6 @@
-﻿using DEVShared;
-using MassTransit;
+﻿using MassTransit;
 using ProjectPet.FileService.Infrastructure.AmazonS3;
+using ProjectPet.VolunteerModule.Contracts.Events;
 
 namespace ProjectPet.FileService.EventConsumers.PetDeletedEventConsumers;
 

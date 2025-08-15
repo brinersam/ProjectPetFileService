@@ -1,6 +1,6 @@
-﻿using DEVShared;
-using MassTransit;
+﻿using MassTransit;
 using Microsoft.Extensions.Options;
+using ProjectPet.Core.Options;
 
 namespace ProjectPet.FileService.Infrastructure.RabbitMQ;
 

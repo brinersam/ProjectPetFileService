@@ -7,7 +7,8 @@
 
   <ItemGroup>
     <PackageReference Include="AWSSDK.S3" Version="4.0.1.7" />
-    <PackageReference Include="Brinersam.ProjectPet.SharedKernel" Version="1.0.5" />
+    <PackageReference Include="Brinersam.ProjectPet.SharedKernel" Version="1.0.6" />
+    <PackageReference Include="Brinersam.ProjectPet.VolunteerModule.Contracts" Version="1.0.0" />
     <PackageReference Include="FluentValidation" Version="12.0.0" />
     <PackageReference Include="Hangfire" Version="1.8.20" />
     <PackageReference Include="Hangfire.AspNetCore" Version="1.8.20" />
@@ -26,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ProjectPet\src\DEVShared\DEVShared.csproj" />
     <ProjectReference Include="..\ProjectPet.FileService.Contracts\ProjectPet.FileService.Contracts.csproj" />
   </ItemGroup>
 
