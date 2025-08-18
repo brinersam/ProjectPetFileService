@@ -85,7 +85,7 @@ public class S3Provider : IS3Provider
             var response = await _s3Client.InitiateMultipartUploadAsync(request, ct);
 
             _logger.LogTrace(
-                "Bucket[{O0}]: Multipart upload started for file (id {O1}, name{O2}, contentType of {O3})",
+                "Bucket[{p0BucketName}]: Multipart upload started for file (id {p1FileId}, name{p2fileName}, contentType of {p3contentType})",
                 location.BucketName,
                 location.FileId,
                 fileName,
@@ -140,7 +140,7 @@ public class S3Provider : IS3Provider
         }
     }
 
-    public async Task<Result<string, Error>> MultipartUploadCompleteAsync(
+    public async Task<Result<FileLocationDto, Error>> MultipartUploadCompleteAsync(
         FileLocationDto location,
         string uploadId,
         IEnumerable<PartETagDto> partETags,
@@ -156,18 +156,19 @@ public class S3Provider : IS3Provider
                 Key = location.FileId,
                 UploadId = uploadId,
                 PartETags = partETags
-                    .Select(x => new Amazon.S3.Model.PartETag(x.PartNumber, x.ETag))
+                    .Select(x => new PartETag(x.PartNumber, x.ETag))
                     .ToList(),
             };
 
             var response = await _s3Client.CompleteMultipartUploadAsync(request, ct);
 
             _logger.LogInformation(
-                "Bucket[{O0}]: Multipart upload (id {O1}) completed!",
+                "Bucket[{O0}]: Multipart upload (id {O1}) completed! (uri: {O2})",
                 location.BucketName,
-                uploadId);
+                uploadId,
+                response.Location);
 
-            return response.Location;
+            return new FileLocationDto(response.Key, response.BucketName);
         }
         catch (AmazonS3Exception exception)
         {

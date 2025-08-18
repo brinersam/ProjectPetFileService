@@ -4,6 +4,7 @@ using ProjectPet.FileService.Contracts.Features.MultipartStartUpload;
 using ProjectPet.FileService.Endpoints;
 using ProjectPet.FileService.Infrastructure.Providers;
 using ProjectPet.FileService.Options;
+using ProjectPet.SharedKernel.ErrorClasses;
 
 namespace ProjectPet.FileService.Features;
 
@@ -21,16 +22,18 @@ public static class MultipartStartUpload
         IS3Provider amazonS3,
         CancellationToken ct)
     {
-        int chunkSizeMb = options.Value.ChunkSizeMb * 1024 * 1024;
+        int chunkSizeMb = options.Value.ChunkSizeMb;
 
         string fileId = Guid.NewGuid().ToString();
 
-        int totalChunks = (int)Math.Ceiling((double)request.FileSize / (double)chunkSizeMb);
+        int totalChunks = (int)Math.Ceiling(((double)request.FileSizeBytes / 1024 / 1024) / (double)chunkSizeMb);
+        if (totalChunks > 9)
+            return Results.BadRequest(Error.Failure("too.many.chunks", $"Size of the file is too big! Almost created {totalChunks} chunks"));
 
         FileLocationDto location = new(fileId, request.BucketName);
 
         var s3Result = await amazonS3.MultipartUploadStartAsync(
-            $"{location.BucketName}/{location.FileId}",
+            request.FileName,
             request.ContentType,
             location,
             ct);
@@ -39,9 +42,8 @@ public static class MultipartStartUpload
             return Results.BadRequest(s3Result.Error);
 
         var response = new MultipartStartUploadResponse(
-                fileId,
+                new FileLocationDto(fileId, request.BucketName),
                 s3Result.Value,
-                request.BucketName,
                 chunkSizeMb,
                 totalChunks);
 

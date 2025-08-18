@@ -1,4 +1,8 @@
-﻿services:
+﻿networks:
+  ProjectPetNetwork:
+    external: true
+
+services:
   projectpet.fileservice:
     container_name: ProjectPet.fileservice
     build:
@@ -19,11 +23,14 @@
         - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
     depends_on:
         - "projectpet.minio"
+    networks:
+      - ProjectPetNetwork
+      - default
 
   projectpet.minio:
     image: minio/minio
     container_name: ProjectPet.fileservice.minio
-    command: server --console-address ":5001" /var/lib/minio/data
+    command: server --address ":5000" --console-address ":5001" /var/lib/minio/data
     environment:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin

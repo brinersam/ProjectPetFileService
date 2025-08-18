@@ -17,7 +17,7 @@ public interface IS3Provider
 
     Task<UnitResult<Error>> MultipartUploadAbortAsync(FileLocationDto location, string uploadId, CancellationToken ct);
 
-    Task<Result<string, Error>> MultipartUploadCompleteAsync(FileLocationDto location, string uploadId, IEnumerable<PartETagDto> partETags, CancellationToken ct);
+    Task<Result<FileLocationDto, Error>> MultipartUploadCompleteAsync(FileLocationDto location, string uploadId, IEnumerable<PartETagDto> partETags, CancellationToken ct);
 
     Task<Result<string, Error>> MultipartUploadStartAsync(string fileName, string contentType, FileLocationDto location, CancellationToken ct);
 

@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using ProjectPet.FileService.Contracts.Dtos;
 using ProjectPet.FileService.Contracts.Features.DeleteFile;
 using ProjectPet.FileService.Contracts.Features.MultipartCancelUpload;
 using ProjectPet.FileService.Contracts.Features.MultipartFinishUpload;
@@ -12,7 +13,7 @@ namespace ProjectPet.FileService.Contracts;
 
 public interface IFileService
 {
-    Task<Result<DeleteFileResponse, Error>> DeleteFileAsync(Guid id, string bucket, DeleteFileRequest request, CancellationToken ct = default);
+    Task<Result<DeleteFileResponse, Error>> DeleteFileAsync(FileLocationDto request, CancellationToken ct = default);
 
     Task<Result<MultipartFinishUploadResponse, Error>> MultipartFinishUploadAsync(MultipartFinishUploadRequest request, CancellationToken ct = default);
 
