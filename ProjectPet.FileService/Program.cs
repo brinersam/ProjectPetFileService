@@ -3,6 +3,7 @@ using ProjectPet.FileService.Extensions;
 using ProjectPet.FileService.Infrastructure.AmazonS3;
 using ProjectPet.FileService.Infrastructure.Hangfire;
 using ProjectPet.FileService.Infrastructure.MongoDb;
+using ProjectPet.FileService.Infrastructure.RabbitMQ;
 using ProjectPet.FileService.Options;
 using Scalar.AspNetCore;
 
@@ -25,6 +26,8 @@ public class Program
 
         builder.Services.Configure<TimeoutStuckUploadsJobOptions>(
             builder.Configuration.GetSection(TimeoutStuckUploadsJobOptions.SECTION));
+
+        builder.AddRabbitMQ();
 
         builder.AddAmazonS3();
 

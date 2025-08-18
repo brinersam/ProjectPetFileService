@@ -7,11 +7,13 @@
 
   <ItemGroup>
     <PackageReference Include="AWSSDK.S3" Version="4.0.1.7" />
-    <PackageReference Include="Brinersam.ProjectPet.SharedKernel" Version="1.0.0" />
+    <PackageReference Include="Brinersam.ProjectPet.SharedKernel" Version="1.0.6" />
+    <PackageReference Include="Brinersam.ProjectPet.VolunteerModule.Contracts" Version="1.0.0" />
     <PackageReference Include="FluentValidation" Version="12.0.0" />
     <PackageReference Include="Hangfire" Version="1.8.20" />
     <PackageReference Include="Hangfire.AspNetCore" Version="1.8.20" />
     <PackageReference Include="Hangfire.Mongo" Version="1.11.6" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.5.2" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.6" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />

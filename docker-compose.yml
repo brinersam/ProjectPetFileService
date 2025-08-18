@@ -27,6 +27,7 @@ services:
     networks:
       - ProjectPetNetwork
       - default
+    restart: always
 
   projectpet.minio:
     image: minio/minio
@@ -40,6 +41,7 @@ services:
         - "5001:5001"
     volumes:
         - ./minio-data:/var/lib/minio/data
+    restart: always
 
   projectpet.fileservice.mongodb:
     image: mongo:latest
@@ -49,3 +51,4 @@ services:
       - "5050:5050"
     volumes:
         - ./mongoDb-data:/data/db
+    restart: always
