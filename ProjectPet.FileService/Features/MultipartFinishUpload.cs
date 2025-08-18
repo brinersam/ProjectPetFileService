@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using ProjectPet.FileService.Domain.FileManagment;
+using ProjectPet.FileService.Contracts.Features.MultipartFinishUpload;
 using ProjectPet.FileService.Endpoints;
 using ProjectPet.FileService.Infrastructure.Providers;
 using IResult = Microsoft.AspNetCore.Http.IResult;
@@ -8,10 +8,6 @@ namespace ProjectPet.FileService.Features;
 
 public static class MultipartFinishUpload
 {
-    private record MultipartFinishUploadRequest(FileLocation FileLocation, string UploadId, List<PartETag> PartEtags);
-
-    private record MultipartFinishUploadDto(string Key);
-
     private class MultipartFinishUploadRequestValidator : AbstractValidator<MultipartFinishUploadRequest>
     {
         public MultipartFinishUploadRequestValidator()
@@ -45,7 +41,7 @@ public static class MultipartFinishUpload
         if (s3Result.IsFailure)
             return Results.BadRequest(s3Result.Error);
 
-        var response = new MultipartFinishUploadDto(s3Result.Value);
+        var response = new MultipartFinishUploadResponse(s3Result.Value);
 
         return Results.Ok(response);
     }

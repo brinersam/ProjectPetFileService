@@ -16,7 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Domain\" />
     <Folder Include="Infrastructure\Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectPet.FileService.Contracts\ProjectPet.FileService.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

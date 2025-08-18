@@ -4,7 +4,18 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>Brinersam.ProjectPet.FileService.Communication</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>ProjectPet</Authors>
+    <Company>ProjectPet</Company>
+    <PackageDescription>Communication project of a FileService</PackageDescription>
+    <RepositoryUrl>https://github.com/brinersam/ProjectPetFileService</RepositoryUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.6" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ProjectPet.FileService.Contracts\ProjectPet.FileService.Contracts.csproj" />

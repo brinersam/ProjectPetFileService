@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
-using ProjectPet.FileService.Domain.FileManagment;
+using ProjectPet.FileService.Contracts.Dtos;
+using ProjectPet.FileService.Contracts.Features.MultipartStartUpload;
 using ProjectPet.FileService.Endpoints;
 using ProjectPet.FileService.Infrastructure.Providers;
 using ProjectPet.FileService.Options;
@@ -8,10 +9,6 @@ namespace ProjectPet.FileService.Features;
 
 public static class MultipartStartUpload
 {
-    private record MultipartStartUploadRequest(string FileName, string ContentType, long FileSize, string BucketName);
-
-    private record MultipartStartUploadDto(string FileId, string UploadId, string BucketName, long ChunkSize, int TotalChunks);
-
     public class Endpoint : IEndpoint
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
@@ -30,7 +27,7 @@ public static class MultipartStartUpload
 
         int totalChunks = (int)Math.Ceiling((double)request.FileSize / (double)chunkSizeMb);
 
-        FileLocation location = new(fileId, request.BucketName);
+        FileLocationDto location = new(fileId, request.BucketName);
 
         var s3Result = await amazonS3.MultipartUploadStartAsync(
             $"{location.BucketName}/{location.FileId}",
@@ -41,7 +38,7 @@ public static class MultipartStartUpload
         if (s3Result.IsFailure)
             return Results.BadRequest(s3Result.Error);
 
-        var response = new MultipartStartUploadDto(
+        var response = new MultipartStartUploadResponse(
                 fileId,
                 s3Result.Value,
                 request.BucketName,

@@ -2,7 +2,7 @@
 using Amazon.S3.Model;
 using CSharpFunctionalExtensions;
 using Microsoft.Extensions.Options;
-using ProjectPet.FileService.Domain.FileManagment;
+using ProjectPet.FileService.Contracts.Dtos;
 using ProjectPet.FileService.Options;
 using ProjectPet.SharedKernel.ErrorClasses;
 
@@ -25,7 +25,7 @@ public class S3Provider : IS3Provider
     }
 
     public async Task<Result<string, Error>> CreatePresignedUploadUrlAsync(
-        FileLocation location,
+        FileLocationDto location,
         string uploadId,
         int partNumber)
     {
@@ -64,7 +64,7 @@ public class S3Provider : IS3Provider
     public async Task<Result<string, Error>> MultipartUploadStartAsync(
         string fileName,
         string contentType,
-        FileLocation location,
+        FileLocationDto location,
         CancellationToken ct)
     {
         try
@@ -100,7 +100,7 @@ public class S3Provider : IS3Provider
     }
 
     public async Task<UnitResult<Error>> MultipartUploadAbortAsync(
-        FileLocation location,
+        FileLocationDto location,
         string uploadId,
         CancellationToken ct)
     {
@@ -141,9 +141,9 @@ public class S3Provider : IS3Provider
     }
 
     public async Task<Result<string, Error>> MultipartUploadCompleteAsync(
-        FileLocation location,
+        FileLocationDto location,
         string uploadId,
-        IEnumerable<Domain.FileManagment.PartETag> partETags,
+        IEnumerable<PartETagDto> partETags,
         CancellationToken ct)
     {
         try
@@ -189,7 +189,7 @@ public class S3Provider : IS3Provider
     }
 
     public async Task<UnitResult<Error>> UploadFileAsync(
-        FileLocation location,
+        FileLocationDto location,
         string? contentType,
         Stream file,
         CancellationToken ct)
@@ -216,7 +216,7 @@ public class S3Provider : IS3Provider
     }
 
     public async Task<Result<string, Error>> DeleteFileAsync(
-        FileLocation location,
+        FileLocationDto location,
         CancellationToken ct)
     {
         try
@@ -241,8 +241,8 @@ public class S3Provider : IS3Provider
         }
     }
 
-    public async Task<Result<FileUrl, Error>> CreatePresignedDownloadUrlAsync(
-        FileLocation location,
+    public async Task<Result<FileUrlDto, Error>> CreatePresignedDownloadUrlAsync(
+        FileLocationDto location,
         int expirationHours)
     {
         try
@@ -265,7 +265,7 @@ public class S3Provider : IS3Provider
                 location.BucketName,
                 location.FileId);
 
-            return new FileUrl(location.FileId, url);
+            return new FileUrlDto(location.FileId, url);
         }
         catch (AmazonS3Exception exception)
         {
@@ -275,7 +275,7 @@ public class S3Provider : IS3Provider
 
     public async Task<Result<string, Error>> CreatePresignedUploadUrlAsync(
         string fileName,
-        FileLocation location)
+        FileLocationDto location)
     {
         try
         {

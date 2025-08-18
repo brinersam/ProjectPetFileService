@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProjectPet.FileService.Domain.FileManagment;
+using ProjectPet.FileService.Contracts.Features.DeleteFile;
 using ProjectPet.FileService.Endpoints;
 using ProjectPet.FileService.Infrastructure.Providers;
 
@@ -7,14 +7,10 @@ namespace ProjectPet.FileService.Features;
 
 public static class DeleteFile
 {
-    private record DeleteFileRequest(FileLocation FileLocation, string UploadId);
-
-    private record DeleteFileDto(string FileId);
-
     public class Endpoint : IEndpoint
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
-            => app.MapDelete("/api/files/{id:guid}/delete", Handler);
+            => app.MapPost("/api/files/{id:guid}/delete", Handler);
     }
 
     private static async Task<IResult> Handler(
@@ -29,7 +25,7 @@ public static class DeleteFile
         if (s3Result.IsFailure)
             return Results.BadRequest(s3Result.Error);
 
-        var response = new DeleteFileDto(s3Result.Value);
+        var response = new DeleteFileResponse(s3Result.Value);
 
         return Results.Ok(response);
     }
