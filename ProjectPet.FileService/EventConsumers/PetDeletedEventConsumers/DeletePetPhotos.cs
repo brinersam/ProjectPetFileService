@@ -11,8 +11,7 @@ public class DeletePetPhotos : IConsumer<PetDeletedEvent>
 
     public DeletePetPhotos(
         IS3Provider s3Provider,
-        ILogger<DeletePetPhotos> logger
-        )
+        ILogger<DeletePetPhotos> logger)
     {
         _s3Provider = s3Provider;
         _logger = logger;

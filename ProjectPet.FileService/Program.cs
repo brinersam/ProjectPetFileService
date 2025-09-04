@@ -4,6 +4,7 @@ using ProjectPet.FileService.Infrastructure.AmazonS3;
 using ProjectPet.FileService.Infrastructure.Hangfire;
 using ProjectPet.FileService.Infrastructure.MongoDb;
 using ProjectPet.FileService.Infrastructure.RabbitMQ;
+using ProjectPet.FileService.Infrastructure.Redis;
 using ProjectPet.FileService.Options;
 using Scalar.AspNetCore;
 
@@ -34,6 +35,8 @@ public class Program
         builder.AddMongoDb();
 
         builder.AddHangfire();
+
+        builder.AddRedis();
 
         var app = builder.Build();
 

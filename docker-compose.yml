@@ -24,6 +24,7 @@ services:
     depends_on:
         - "projectpet.minio"
         - "projectpet.fileservice.mongodb"
+        - "projectpet.fileservice.redis"
     networks:
       - ProjectPetNetwork
       - default
@@ -52,3 +53,15 @@ services:
     volumes:
         - ./mongoDb-data:/data/db
     restart: always
+  
+  projectpet.fileservice.redis:
+    image: redis:latest
+    container_name: ProjectPet.fileservice.redis
+    command: --port 4050
+    environment:
+      SKIP_DROP_PRIVS: 1
+    ports:
+      - "4050:4050"
+    volumes:
+        - ./redis-data:/data
+    restart: always    
