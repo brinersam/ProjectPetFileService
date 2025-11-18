@@ -4,4 +4,6 @@ Sample file service that utilizes s3 for file managment.
 
 Hangfire starts background task that cleans up softdeleted files after time specified in appsettings, that goes into code by using IOptions pattern supplied by the framework.
 
+Uses Redis for cachine download presigned links to avoid remaking them every time a file is requested
+
 Contains docker compose with related services that are needed for the mcroservice to function.
