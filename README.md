@@ -1,0 +1,7 @@
+Sample file service that utilizes s3 for file managment.
+
+**Contracts project** contains models and interface required to interact with the service via **htmlclient**, implementation of which is in **communication project**.
+
+Hangfire starts background task that cleans up softdeleted files after time specified in appsettings, that goes into code by using IOptions pattern supplied by the framework.
+
+Contains docker compose with related services that are needed for the mcroservice to function.
