@@ -31,7 +31,9 @@ public static class AmazonS3Extensions
             return new AmazonS3Client(creds, config);
         });
 
-        builder.Services.AddSingleton<IS3Provider, S3Provider>();
+        builder.Services.AddSingleton<S3Provider>();
+
+        builder.Services.AddSingleton<IS3Provider, S3ProviderCachingDecorator>();
 
         return builder;
     }
